@@ -30,23 +30,26 @@ function Login(props) {
 			.catch(err => console.log(err));
 	};
 	return (
-		<form onSubmit={e => submitLogin(e)}>
-			<input
-				name="username"
-				type="text"
-				value={value.username}
-				placeholder="username"
-				onChange={e => handleChange(e)}
-			/>
-			<input
-				name="password"
-				type="password"
-				value={value.password}
-				placeholder="password"
-				onChange={e => handleChange(e)}
-			/>
-			<button type="submit">Login</button>
-		</form>
+		<div>
+			<h1>{value.message}</h1>
+			<form onSubmit={e => submitLogin(e)}>
+				<input
+					name="username"
+					type="text"
+					value={value.username}
+					placeholder="username"
+					onChange={e => handleChange(e)}
+				/>
+				<input
+					name="password"
+					type="password"
+					value={value.password}
+					placeholder="password"
+					onChange={e => handleChange(e)}
+				/>
+				<button type="submit">Login</button>
+			</form>
+		</div>
 	);
 }
 

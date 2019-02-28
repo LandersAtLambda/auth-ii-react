@@ -15,15 +15,14 @@ function Users() {
 	}, []);
 
 	return (
-		<>
-			<ul>
-				{users.map(user => (
-					<li key={user.id}>
-						<h3>{user.username}</h3>
-					</li>
-				))}
-			</ul>
-		</>
+		<div className="userList">
+			{users.map(user => (
+				<div className="user" key={user.id}>
+					<h3>Username: {user.username}</h3>
+					<p>Department: {user.department}</p>
+				</div>
+			))}
+		</div>
 	);
 }
 
