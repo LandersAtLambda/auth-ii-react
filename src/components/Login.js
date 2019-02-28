@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function Login() {
+function Login(props) {
 	const [value, setValue] = useState({
 		username: '',
 		password: '',
@@ -25,6 +25,7 @@ function Login() {
 			.then(res => {
 				console.log(res);
 				localStorage.setItem('token', res.data.token);
+				props.setLoggedIn(true);
 			})
 			.catch(err => console.log(err));
 	};
