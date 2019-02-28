@@ -5,6 +5,7 @@ function Login(props) {
 	const [value, setValue] = useState({
 		username: '',
 		password: '',
+		department: '',
 	});
 
 	const handleChange = e => {
@@ -19,13 +20,13 @@ function Login(props) {
 		let user = {
 			username: value.username,
 			password: value.password,
+			department: value.department,
 		};
 		axios
-			.post('https://lambda-auth-ii.herokuapp.com/api/login', user)
+			.post('https://lambda-auth-ii.herokuapp.com/api/register', user)
 			.then(res => {
 				console.log(res);
-				localStorage.setItem('jwt', res.data.token);
-				props.history.push('/users');
+				props.history.push('/login');
 			})
 			.catch(err => console.log(err));
 	};
@@ -45,7 +46,15 @@ function Login(props) {
 				placeholder="password"
 				onChange={e => handleChange(e)}
 			/>
-			<button type="submit">Login</button>
+			<input
+				name="department"
+				type="text"
+				value={value.department}
+				placeholder="department"
+				onChange={e => handleChange(e)}
+			/>
+
+			<button type="submit">Register</button>
 		</form>
 	);
 }

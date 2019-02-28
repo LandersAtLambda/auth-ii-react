@@ -1,36 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { Route, NavLink, withRouter } from 'react-router-dom';
 import './App.css';
 import Login from './components/Login';
-import Nav from './components/Nav';
+import Users from './users/Users';
+import Register from './components/Register';
 
-function App() {
-	const [users, setUsers] = useState([]);
-	const [loggedIn, setLoggedIn] = useState(false);
-	const token = localStorage.getItem('token');
-
-	useEffect(() => {
-		axios
-			.get('https://lambda-auth-ii.herokuapp.com/api/users', {
-				headers: {
-					Authorization: token,
-				},
-			})
-			.then(res => {
-				setUsers(res.data.users);
-			})
-			.catch(err => console.log(err.message));
-	}, []);
+function App(props) {
+	const handleLogout = () => {
+		localStorage.removeItem('jwt');
+		props.history.push('/login');
+	};
 
 	return (
-		<div>
-			<Nav setLoggedIn={setLoggedIn} />
-			<Login setLoggedIn={setLoggedIn} />
-			{users.map(user => (
-				<h1>{user.username}</h1>
-			))}
-		</div>
+		<>
+			<header>
+				<nav>
+					<NavLink to="/login">Login</NavLink>
+					&nbsp;|&nbsp;
+					<NavLink to="/register">Register</NavLink>
+					&nbsp;|&nbsp;
+					<NavLink to="/users">Users</NavLink>
+					&nbsp;|&nbsp;
+					<button
+						onClick={() => {
+							handleLogout();
+						}}>
+						Logout
+					</button>
+				</nav>
+			</header>
+			<Route exact path="/login" component={Login} />
+			<Route exact path="/register" component={Register} />
+			<Route exact path="/users" component={Users} />
+		</>
 	);
 }
 
-export default App;
+export default withRouter(App);
