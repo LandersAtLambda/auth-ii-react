@@ -1,6 +1,9 @@
 .App {
 	text-align: center;
 }
+.userWrapper{
+  display: flex;
+}
 .userList {
 	display: flex;
 	flex-wrap: wrap;
@@ -17,4 +20,15 @@
 	border-radius: 4px;
 	max-width: 300px;
 	width: 100%;
+}
+.sidebar {
+	display: flex;
+	flex-direction: column;
+	max-width: 100px;
+	width: 100%;
+}
+.sidebar button {
+	padding: 5px;
+	font-size: 1.3rem;
+	margin: 5px 0;
 }
